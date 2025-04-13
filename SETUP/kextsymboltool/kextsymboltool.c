@@ -520,7 +520,12 @@ main(int argc, char * argv[])
 	};
 	struct file files[64];
 
-	host_arch = NXGetLocalArchInfo();
+	//host_arch = NXGetLocalArchInfo();
+	host_arch = NXGetArchInfoFromCpuType(CPU_TYPE_X86_64, CPU_SUBTYPE_X86_64_ALL);
+	if (!host_arch) {
+		fprintf(stderr, "unknown host architecture\n");
+		exit(1);
+	}
 	target_arch = host_arch;
 
 	for (i = 1; i < argc; i += 2) {
